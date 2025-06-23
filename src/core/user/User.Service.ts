@@ -3,8 +3,8 @@ import { UserRepository } from './User.Repository';
 import { CreateUserDto } from './dto/CreateUserDto';
 import * as bcrypt from 'bcrypt';
 
-import { User } from './entities/User.Entity';
 import { plainToInstance } from 'class-transformer';
+import { User } from '../entities';
 
 @Injectable()
 export class UserService {

@@ -1,5 +1,5 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/User.Entity';
+import { User } from '../entities';
 
 export class UserDIToken {
   static readonly UserSymbol = 'User';
