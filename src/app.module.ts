@@ -1,10 +1,23 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { CacheModule } from '@nestjs/cache-manager';
+import { Module, NestModule } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { AppController } from './App.Controller';
+import { AppConfigModule } from './config/AppConfigModule';
+import { CoreModule } from './core/.Core.Module';
 
 @Module({
-  imports: [],
+  imports: [
+    AppConfigModule,
+    CacheModule.register({ isGlobal: true }),
+    ThrottlerModule.forRoot(),
+    EventEmitterModule.forRoot(),
+    CoreModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure() {}
+}
