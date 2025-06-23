@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+dist/
+
+# Build outputs
+*.js
+*.js.map
+
+# Temporary directories
+/private/var/folders/**/*
+/tmp/**/*
+/var/folders/**/*
+.trunk/out/**/*
+
+# Configuration files
+.eslintrc.js
+.prettierrc
+
+# Test coverage
+coverage/
+
+# Environment files
+.env* 
