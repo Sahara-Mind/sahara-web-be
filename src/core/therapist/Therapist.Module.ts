@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
+import { TherapistAppointmentModule } from './appointment/TherapistAppointment.Module';
 
 // Export the therapist modules array for reuse in Swagger configuration
-// Currently empty, but ready for future therapist functionality
-export const THERAPIST_MODULES: any[] = [];
+export const THERAPIST_MODULES = [TherapistAppointmentModule];
 
 @Module({
   imports: THERAPIST_MODULES,
