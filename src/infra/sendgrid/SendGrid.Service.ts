@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Client } from '@sendgrid/client';
-import SendGridMail from '@sendgrid/mail';
+import * as SendGridMail from '@sendgrid/mail';
 import { InfraConfig } from 'src/config/InfraConfig';
 import { IEmailAttachment } from 'src/lib/interface/IEmailAttachment';
 
@@ -42,9 +42,8 @@ export class SendGridService {
             to: email,
             from: {
               name: 'Sahara Mind',
-              email: sendGridMailPayload.fromEmailAddress
-                ? sendGridMailPayload.fromEmailAddress
-                : 'support@saharamind.com',
+              email:
+                sendGridMailPayload.fromEmailAddress ?? 'yugal@saharamind.com',
             },
             templateId: sendGridMailPayload.templateId,
             dynamicTemplateData: sendGridMailPayload.body,

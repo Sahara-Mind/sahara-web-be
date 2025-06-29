@@ -19,6 +19,10 @@ async function bootstrap() {
   // Setup Swagger documentation
   setupSwagger(app);
 
+  console.log('🚀 Server starting...');
+  console.log('📖 Swagger documentation at: http://localhost:3000/api');
+  console.log('📊 Bull Board available at: http://localhost:3000/admin/queues');
+
   await app.listen(3000);
 }
 

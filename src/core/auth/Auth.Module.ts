@@ -5,6 +5,7 @@ import { AuthController } from './Auth.Controller';
 import { UserModule } from '../user/User.Module';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './Auth.Strategy';
+import { SendGridModule } from '../../infra/sendgrid/SendGrid.Module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { JwtStrategy } from './Auth.Strategy';
     JwtModule.register({
       secret: process.env.CUSTOM_JWT_SECRET,
     }),
+    SendGridModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
