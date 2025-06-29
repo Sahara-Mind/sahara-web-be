@@ -41,17 +41,19 @@ export class AdminAppointmentController {
     return this.adminAppointmentService.findAllAppointments();
   }
 
-  @Get(':id')
+  @Get(':appointmentId')
   @ApiOperation({ summary: 'Get appointment by ID' })
-  @ApiParam({ name: 'id', description: 'Appointment ID' })
+  @ApiParam({ name: 'appointmentId', description: 'Appointment ID' })
   @ApiResponse({
     status: 200,
     description: 'Appointment found',
     type: Appointment,
   })
   @ApiResponse({ status: 404, description: 'Appointment not found' })
-  async findById(@Param('id') id: string): Promise<Appointment | null> {
-    return this.adminAppointmentService.findAppointmentById(id);
+  async findById(
+    @Param('appointmentId') appointmentId: string,
+  ): Promise<Appointment | null> {
+    return this.adminAppointmentService.findAppointmentById(appointmentId);
   }
 
   @Post()
@@ -68,9 +70,9 @@ export class AdminAppointmentController {
     return this.adminAppointmentService.createAppointment(createAppointmentDto);
   }
 
-  @Put(':id')
+  @Put(':appointmentId')
   @ApiOperation({ summary: 'Update appointment by ID' })
-  @ApiParam({ name: 'id', description: 'Appointment ID' })
+  @ApiParam({ name: 'appointmentId', description: 'Appointment ID' })
   @ApiBody({ type: CreateAppointmentDto })
   @ApiResponse({
     status: 200,
@@ -79,18 +81,21 @@ export class AdminAppointmentController {
   })
   @ApiResponse({ status: 404, description: 'Appointment not found' })
   async update(
-    @Param('id') id: string,
+    @Param('appointmentId') appointmentId: string,
     @Body() updateDto: any,
   ): Promise<Appointment | null> {
-    return this.adminAppointmentService.updateAppointment(id, updateDto);
+    return this.adminAppointmentService.updateAppointment(
+      appointmentId,
+      updateDto,
+    );
   }
 
-  @Delete(':id')
+  @Delete(':appointmentId')
   @ApiOperation({ summary: 'Delete appointment by ID' })
-  @ApiParam({ name: 'id', description: 'Appointment ID' })
+  @ApiParam({ name: 'appointmentId', description: 'Appointment ID' })
   @ApiResponse({ status: 200, description: 'Appointment deleted successfully' })
   @ApiResponse({ status: 404, description: 'Appointment not found' })
-  async delete(@Param('id') id: string): Promise<void> {
-    return this.adminAppointmentService.deleteAppointment(id);
+  async delete(@Param('appointmentId') appointmentId: string): Promise<void> {
+    return this.adminAppointmentService.deleteAppointment(appointmentId);
   }
 }

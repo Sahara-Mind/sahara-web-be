@@ -53,17 +53,19 @@ export class AdminTherapistController {
     return this.adminTherapistService.findAllTherapists(filter);
   }
 
-  @Get(':id')
+  @Get(':therapistId')
   @ApiOperation({ summary: 'Get therapist by ID' })
-  @ApiParam({ name: 'id', description: 'Therapist ID' })
+  @ApiParam({ name: 'therapistId', description: 'Therapist ID' })
   @ApiResponse({
     status: 200,
     description: 'Therapist found',
     type: Therapist,
   })
   @ApiResponse({ status: 404, description: 'Therapist not found' })
-  async findById(@Param('id') id: string): Promise<Therapist | null> {
-    return this.adminTherapistService.findTherapistById(id);
+  async findById(
+    @Param('therapistId') therapistId: string,
+  ): Promise<Therapist | null> {
+    return this.adminTherapistService.findTherapistById(therapistId);
   }
 
   @Post()
@@ -80,9 +82,9 @@ export class AdminTherapistController {
     return this.adminTherapistService.createTherapist(createTherapistDto);
   }
 
-  @Put(':id')
+  @Put(':therapistId')
   @ApiOperation({ summary: 'Update therapist by ID' })
-  @ApiParam({ name: 'id', description: 'Therapist ID' })
+  @ApiParam({ name: 'therapistId', description: 'Therapist ID' })
   @ApiBody({ type: UpdateTherapistDto })
   @ApiResponse({
     status: 200,
@@ -91,18 +93,21 @@ export class AdminTherapistController {
   })
   @ApiResponse({ status: 404, description: 'Therapist not found' })
   async update(
-    @Param('id') id: string,
+    @Param('therapistId') therapistId: string,
     @Body() updateTherapistDto: UpdateTherapistDto,
   ): Promise<Therapist | null> {
-    return this.adminTherapistService.updateTherapist(id, updateTherapistDto);
+    return this.adminTherapistService.updateTherapist(
+      therapistId,
+      updateTherapistDto,
+    );
   }
 
-  @Delete(':id')
+  @Delete(':therapistId')
   @ApiOperation({ summary: 'Delete therapist by ID' })
-  @ApiParam({ name: 'id', description: 'Therapist ID' })
+  @ApiParam({ name: 'therapistId', description: 'Therapist ID' })
   @ApiResponse({ status: 200, description: 'Therapist deleted successfully' })
   @ApiResponse({ status: 404, description: 'Therapist not found' })
-  async delete(@Param('id') id: string): Promise<void> {
-    return this.adminTherapistService.deleteTherapist(id);
+  async delete(@Param('therapistId') therapistId: string): Promise<void> {
+    return this.adminTherapistService.deleteTherapist(therapistId);
   }
 }
